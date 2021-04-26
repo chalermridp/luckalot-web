@@ -1,10 +1,34 @@
-function Result({ results }) {
+function Result({ resultView }) {
   return (
-    <ul>
-      {results.map((result) => (
-        <li>{result.result_type_code} {result.value}</li>
-      ))}
-    </ul>
+    <div>
+      <div>
+        {resultView.first}
+      </div>
+      <div>
+        {resultView.nearby_first}
+      </div>
+      <div>
+        {resultView.three_prefix}
+      </div>
+      <div>
+        {resultView.three_suffix}
+      </div>
+      <div>
+        {resultView.two_suffix}
+      </div>
+      <div>
+        {resultView.second}
+      </div>
+      <div>
+        {resultView.third}
+      </div>
+      <div>
+        {resultView.fourth}
+      </div>
+      <div>
+        {resultView.fifth}
+      </div>
+    </div>
   )
 }
 
@@ -20,12 +44,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${process.env.LUCKALOT_API_URL}/results/${params.date}`)
-  const results = await res.json()
+  const res = await fetch(`${process.env.LUCKALOT_API_URL}/results/${params.date}/view`)
+  const resultView = await res.json()
 
   return {
     props: {
-      results,
+      resultView,
     },
   }
 }
